@@ -1,15 +1,10 @@
 // Manipulación del DOM
-const colorButton = document.getElementById('colorButton');
 const taskInput = document.getElementById('taskInput');
 const addTaskButton = document.getElementById('addTaskButton');
 const pendingTasks = document.getElementById('taskList');
 const inProgressTasks = document.getElementById('inProgressList');
 
-// Cambiar el color de fondo al azar
-colorButton.addEventListener('click', () => {
-    const randomColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-    document.body.style.backgroundColor = randomColor;
-});
+
 
 // Agregar nuevas tareas a la lista de pendientes
 addTaskButton.addEventListener('click', () => {
@@ -52,31 +47,3 @@ const observer = new MutationObserver(() => {
 
 observer.observe(pendingTasks, { childList: true });
 observer.observe(inProgressTasks, { childList: true });
-
-// CSS para animación de las tareas
-const style = document.createElement('style');
-style.textContent = `
-    .fade-in {
-        animation: fadeIn 0.5s ease-in-out;
-    }
-
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    button {
-        margin-left: 10px;
-        background-color: #6200ea;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background-color: #3700b3;
-    }
-`;
-document.head.appendChild(style);
