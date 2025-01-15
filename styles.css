@@ -43,6 +43,47 @@ section {
     text-align: center;
 }
 
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+li:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Tareas Pendientes */
+#taskList li {
+    background-color: #ffebee; /* Fondo rojo claro */
+    color: #b71c1c; /* Texto rojo oscuro */
+}
+
+/* Tareas en Curso */
+#inProgressList li {
+    background-color: #fff8e1; /* Fondo amarillo claro */
+    color: #f57f17; /* Texto amarillo oscuro */
+}
+
+/* Tareas Hechas */
+#doneList li {
+    background-color: #e8f5e9; /* Fondo verde claro */
+    color: #2e7d32; /* Texto verde oscuro */
+    text-decoration: line-through; /* Línea que cruza el texto */
+}
+
+/* Estilo de botones */
 button {
     background-color: #6200ea;
     color: white;
@@ -58,6 +99,7 @@ button:hover {
     background-color: #3700b3;
 }
 
+/* Input de texto */
 input[type="text"] {
     width: calc(100% - 22px);
     padding: 0.5rem;
@@ -67,6 +109,7 @@ input[type="text"] {
     border-radius: 5px;
 }
 
+/* Footer */
 footer {
     text-align: center;
     background-color: #333;
@@ -75,6 +118,7 @@ footer {
     margin-top: 2rem;
 }
 
+/* Animación de aparición */
 .fade-in {
     animation: fadeIn 0.5s ease-in-out;
 }

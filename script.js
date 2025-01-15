@@ -3,8 +3,7 @@ const taskInput = document.getElementById('taskInput');
 const addTaskButton = document.getElementById('addTaskButton');
 const pendingTasks = document.getElementById('taskList');
 const inProgressTasks = document.getElementById('inProgressList');
-
-
+const doneTasks = document.getElementById('doneList');
 
 // Agregar nuevas tareas a la lista de pendientes
 addTaskButton.addEventListener('click', () => {
@@ -14,13 +13,23 @@ addTaskButton.addEventListener('click', () => {
         newTask.textContent = taskText;
 
         // Botón para mover a "En Curso"
-        const moveButton = document.createElement('button');
-        moveButton.textContent = 'En Curso';
-        moveButton.addEventListener('click', () => {
+        const moveToInProgressButton = document.createElement('button');
+        moveToInProgressButton.textContent = 'En Curso';
+        moveToInProgressButton.addEventListener('click', () => {
             pendingTasks.removeChild(newTask);
             inProgressTasks.appendChild(newTask);
-            moveButton.remove(); // Quitar botón "En Curso"
+            moveToInProgressButton.remove(); // Quitar botón "En Curso"
+            newTask.appendChild(moveToDoneButton); // Agregar botón "Hecho"
             newTask.appendChild(deleteButton); // Agregar botón de eliminar
+        });
+
+        // Botón para mover a "Hecho"
+        const moveToDoneButton = document.createElement('button');
+        moveToDoneButton.textContent = 'Hecho';
+        moveToDoneButton.addEventListener('click', () => {
+            inProgressTasks.removeChild(newTask);
+            doneTasks.appendChild(newTask);
+            moveToDoneButton.remove(); // Quitar botón "Hecho"
         });
 
         // Botón para eliminar tareas
@@ -31,7 +40,7 @@ addTaskButton.addEventListener('click', () => {
             parentList.removeChild(newTask);
         });
 
-        newTask.appendChild(moveButton);
+        newTask.appendChild(moveToInProgressButton);
         pendingTasks.appendChild(newTask);
         taskInput.value = '';
     } else {
@@ -41,9 +50,10 @@ addTaskButton.addEventListener('click', () => {
 
 // Animación al agregar tareas
 const observer = new MutationObserver(() => {
-    const tasks = document.querySelectorAll('#taskList li, #inProgressList li');
+    const tasks = document.querySelectorAll('#taskList li, #inProgressList li, #doneList li');
     tasks[tasks.length - 1]?.classList.add('fade-in');
 });
 
 observer.observe(pendingTasks, { childList: true });
 observer.observe(inProgressTasks, { childList: true });
+observer.observe(doneTasks, { childList: true });
